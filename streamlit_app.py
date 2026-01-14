@@ -31,10 +31,12 @@ else:
         disabled=not uploaded_file,
     )
 
-    if openai_api_key:
-        validate_key = client.openai_api_key.validate()
-        if not validate_key["valid"]:
-            st.error("The provided OpenAI API key is not valid. Please try again.")
+    try:
+        client.models.list()
+    except Exception as e:
+        st.error("Invalid OpenAI API key or network error. Please check your key and try again.")
+        st.write(e)
+        st.stop()
 
     if uploaded_file and question:
 

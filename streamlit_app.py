@@ -32,7 +32,7 @@ else:
     )
 
     if openai_api_key:
-        validate_key = client.api_keys.validate()
+        validate_key = client.openai_api_key.validate()
         if not validate_key["valid"]:
             st.error("The provided OpenAI API key is not valid. Please try again.")
 
